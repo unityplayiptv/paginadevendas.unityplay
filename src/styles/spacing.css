@@ -1,0 +1,21 @@
+/* Espaçamento responsivo entre seções */
+@layer utilities {
+  .section-spacing {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  @media (min-width: 640px) {
+    .section-spacing {
+      margin-top: 4rem;
+      margin-bottom: 4rem;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .section-spacing {
+      margin-top: 6rem;
+      margin-bottom: 6rem;
+    }
+  }
+}

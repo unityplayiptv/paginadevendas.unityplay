@@ -13,7 +13,7 @@ const ContentCarousel = () => {
     { id: 2, title: "Diário de um Vampiro", image: "/paginadevendas.unityplay/images/2.webp" },
     { id: 3, title: "One Piece", image: "/paginadevendas.unityplay/images/3.webp" },
     { id: 4, title: "The Walking Dead", image: "/paginadevendas.unityplay/images/4.webp" },
-    { id: 5, title: "Quando o telefone toca", image: "/paginadevendas.unityplay/images/5.webp" },
+    { id: 5, title: "Quando o Telefone Toca", image: "/paginadevendas.unityplay/images/5.webp" },
     { id: 6, title: "Stranger Things", image: "/paginadevendas.unityplay/images/6.webp" },
     { id: 7, title: "The Witcher", image: "/paginadevendas.unityplay/images/7.webp" },
     { id: 8, title: "Sobrenatural", image: "/paginadevendas.unityplay/images/8.webp" },

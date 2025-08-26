@@ -103,8 +103,8 @@ const ChannelLogos = () => {
 
   return (
     <section className="py-8 sm:py-12 bg-gradient-to-b from-background/50 to-background overflow-hidden">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-6 sm:mb-8">
+      <div className="container mx-auto px-4 sm:px-6 mb-8 sm:mb-12">
+        <div className="text-center">
           <h2 className="text-xl sm:text-2xl font-bold text-high-contrast mb-2">
             Tenha acesso a mais de 80 mil conteúdos
           </h2>
@@ -112,51 +112,53 @@ const ChannelLogos = () => {
             Incluindo os canais e plataformas mais populares do Brasil e do mundo
           </p>
         </div>
-        
-        {/* Carrossel que sai dos limites da tela */}
-        <div className="relative w-screen -mx-4 sm:-mx-6 lg:-mx-8">
-          <div className="overflow-hidden">
-            <div
-              ref={scrollRef}
-              className={`flex gap-6 sm:gap-8 will-change-transform pl-4 sm:pl-6 lg:pl-8 ${
-                isDragging ? 'cursor-grabbing' : 'cursor-grab'
-              }`}
-              style={{ width: `${duplicatedChannels.length * 120}px` }}
-              onMouseDown={handleMouseDown}
-              onMouseMove={handleMouseMove}
-              onMouseUp={handleMouseUp}
-              onMouseLeave={handleMouseLeave}
-            >
-              {duplicatedChannels.map((channel, index) => (
-                <div
-                  key={`${channel.name}-${index}`}
-                  className="flex-shrink-0 bg-white/10 backdrop-blur-sm rounded-lg p-3 sm:p-4 border border-white/20 hover:bg-white/20 transition-all duration-300 select-none"
-                >
-                  <div className="flex flex-col items-center space-y-1 sm:space-y-2">
-                    <div className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center">
-                      {imageErrors.has(channel.name) ? (
-                        <div className="text-2xl sm:text-3xl">{channel.fallback}</div>
-                      ) : (
-                        <img
-                          src={channel.logo}
-                          alt={`${channel.name} logo`}
-                          className="w-full h-full object-contain"
-                          loading="lazy"
-                          onError={() => handleImageError(channel.name)}
-                          draggable={false}
-                        />
-                      )}
-                    </div>
-                    <span className="text-xs sm:text-sm font-medium text-center whitespace-nowrap">
-                      {channel.name}
-                    </span>
+      </div>
+      
+      {/* Carrossel que ocupa toda a largura da tela */}
+      <div className="relative w-full">
+        <div className="overflow-hidden">
+          <div
+            ref={scrollRef}
+            className={`flex gap-6 sm:gap-8 will-change-transform ${
+              isDragging ? 'cursor-grabbing' : 'cursor-grab'
+            }`}
+            style={{ width: `${duplicatedChannels.length * 140}px` }}
+            onMouseDown={handleMouseDown}
+            onMouseMove={handleMouseMove}
+            onMouseUp={handleMouseUp}
+            onMouseLeave={handleMouseLeave}
+          >
+            {duplicatedChannels.map((channel, index) => (
+              <div
+                key={`${channel.name}-${index}`}
+                className="flex-shrink-0 bg-white/10 backdrop-blur-sm rounded-lg p-3 sm:p-4 border border-white/20 hover:bg-white/20 transition-all duration-300 select-none"
+              >
+                <div className="flex flex-col items-center space-y-1 sm:space-y-2">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center">
+                    {imageErrors.has(channel.name) ? (
+                      <div className="text-2xl sm:text-3xl">{channel.fallback}</div>
+                    ) : (
+                      <img
+                        src={channel.logo}
+                        alt={`${channel.name} logo`}
+                        className="w-full h-full object-contain"
+                        loading="lazy"
+                        onError={() => handleImageError(channel.name)}
+                        draggable={false}
+                      />
+                    )}
                   </div>
+                  <span className="text-xs sm:text-sm font-medium text-center whitespace-nowrap">
+                    {channel.name}
+                  </span>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
         </div>
-        
+      </div>
+      
+      <div className="container mx-auto px-4">
         <div className="text-center mt-6 sm:mt-8">
           <div className="inline-flex items-center space-x-2 bg-primary/10 border border-primary/20 rounded-full px-4 py-2">
             <span className="text-primary font-semibold text-sm">✨ E muito mais!</span>

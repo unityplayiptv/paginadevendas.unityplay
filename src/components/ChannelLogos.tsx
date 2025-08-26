@@ -4,21 +4,21 @@ const ChannelLogos = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const channels = [
-    { name: 'Animal-planet', logo: '/images-logo/Animal-Planet.png', fallback: '🌐' },
-    { name: 'AppleTV', logo: '/images-logo/AppleTV.png', fallback: '📺' },
-    { name: 'Cartoon-Network', logo: '/images-logo/Cartoon-Network.png', fallback: '🔴' },
-    { name: 'Combate', logo: '/images-logo/Combate.png', fallback: '📻' },
-    { name: 'Disney+', logo: '/images-logo/Disney+.png', fallback: '🎬' },
-    { name: 'ESPN', logo: '/images-logo/ESPN.png', fallback: '🏰' },
-    { name: 'Globoplay', logo: '/images-logo/Globoplay.png', fallback: '📽️' },
-    { name: 'History', logo: '/images-logo/History.png', fallback: '🎭' },
-    { name: 'Max+', logo: '/images-logo/Max.png', fallback: '⭐' },
-    { name: 'Netflix', logo: '/images-logo/Netflix.png', fallback: '🍎' },
-    { name: 'Paramount', logo: '/images-logo/Paramount.png', fallback: '⚽' },
-    { name: 'Prime-Video', logo: '/images-logo/Prime-video.png', fallback: '🏆' },
-    { name: 'Sportv', logo: '/images-logo/Sportv.png', fallback: '🎨' },
-    { name: 'Star+', logo: '/images-logo/Star+.png', fallback: '🔍' },
-    { name: 'Tnt-Sports', logo: '/images-logo/Tnt-Sports.png', fallback: '🌍' }
+    { name: 'Animal-planet', logo: '/paginadevendas.unityplay/images-logo/Animal-Planet.png', fallback: '🌐' },
+    { name: 'AppleTV', logo: '/paginadevendas.unityplay/images-logo/AppleTV.png', fallback: '📺' },
+    { name: 'Cartoon-Network', logo: '/paginadevendas.unityplay/images-logo/Cartoon-Network.png', fallback: '🔴' },
+    { name: 'Combate', logo: '/paginadevendas.unityplay/images-logo/Combate.png', fallback: '📻' },
+    { name: 'Disney+', logo: '/paginadevendas.unityplay/images-logo/Disney+.png', fallback: '🎬' },
+    { name: 'ESPN', logo: '/paginadevendas.unityplay/images-logo/ESPN.png', fallback: '🏰' },
+    { name: 'Globoplay', logo: '/paginadevendas.unityplay/images-logo/Globoplay.png', fallback: '📽️' },
+    { name: 'History', logo: '/paginadevendas.unityplay/images-logo/History.png', fallback: '🎭' },
+    { name: 'Max+', logo: '/paginadevendas.unityplay/images-logo/Max.png', fallback: '⭐' },
+    { name: 'Netflix', logo: '/paginadevendas.unityplay/images-logo/Netflix.png', fallback: '🍎' },
+    { name: 'Paramount', logo: '/paginadevendas.unityplay/images-logo/Paramount.png', fallback: '⚽' },
+    { name: 'Prime-Video', logo: '/paginadevendas.unityplay/images-logo/Prime-video.png', fallback: '🏆' },
+    { name: 'Sportv', logo: '/paginadevendas.unityplay/images-logo/Sportv.png', fallback: '🎨' },
+    { name: 'Star+', logo: '/paginadevendas.unityplay/images-logo/Star+.png', fallback: '🔍' },
+    { name: 'Tnt-Sports', logo: '/paginadevendas.unityplay/images-logo/Tnt-Sports.png', fallback: '🌍' }
   ];
 
   // Duplicar os itens para criar o efeito infinito

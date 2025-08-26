@@ -35,21 +35,26 @@ const ContentCarousel = () => {
   // Duplicar os itens para criar o efeito infinito
   const duplicatedItems = [...contentItems, ...contentItems];
 
-  // Função para iniciar o arrasto
-  const handleMouseDown = (e: React.MouseEvent) => {
+  // Função para obter coordenada X de mouse ou touch
+  const getClientX = (e: React.MouseEvent | React.TouchEvent) => {
+    return 'touches' in e ? e.touches[0].clientX : e.clientX;
+  };
+
+  // Função para iniciar o arrasto (mouse e touch)
+  const handleStart = (e: React.MouseEvent | React.TouchEvent) => {
     setIsDragging(true);
-    setStartX(e.pageX);
+    setStartX(getClientX(e));
     setScrollLeft(currentTranslate);
     if (animationRef.current) {
       cancelAnimationFrame(animationRef.current);
     }
   };
 
-  // Função para mover durante o arrasto
-  const handleMouseMove = (e: React.MouseEvent) => {
+  // Função para mover durante o arrasto (mouse e touch)
+  const handleMove = (e: React.MouseEvent | React.TouchEvent) => {
     if (!isDragging) return;
     e.preventDefault();
-    const x = e.pageX;
+    const x = getClientX(e);
     const walk = (x - startX) * 2; // Multiplicador para sensibilidade
     const newTranslate = scrollLeft + walk;
     setCurrentTranslate(newTranslate);
@@ -59,13 +64,8 @@ const ContentCarousel = () => {
     }
   };
 
-  // Função para finalizar o arrasto
-  const handleMouseUp = () => {
-    setIsDragging(false);
-  };
-
-  // Função para quando o mouse sai do carrossel
-  const handleMouseLeave = () => {
+  // Função para finalizar o arrasto (mouse e touch)
+  const handleEnd = () => {
     setIsDragging(false);
   };
 
@@ -116,10 +116,13 @@ const ContentCarousel = () => {
               isDragging ? 'cursor-grabbing' : 'cursor-grab'
             }`}
             style={{ width: `${duplicatedItems.length * 200}px` }}
-            onMouseDown={handleMouseDown}
-            onMouseMove={handleMouseMove}
-            onMouseUp={handleMouseUp}
-            onMouseLeave={handleMouseLeave}
+            onMouseDown={handleStart}
+            onMouseMove={handleMove}
+            onMouseUp={handleEnd}
+            onMouseLeave={handleEnd}
+            onTouchStart={handleStart}
+            onTouchMove={handleMove}
+            onTouchEnd={handleEnd}
           >
             {duplicatedItems.map((item, index) => (
               <div

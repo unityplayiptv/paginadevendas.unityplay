@@ -1,7 +1,12 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 const ChannelLogos = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeft, setScrollLeft] = useState(0);
+  const [currentTranslate, setCurrentTranslate] = useState(0);
+  const animationRef = useRef<number>();
 
   const channels = [
     { name: 'Animal-planet', logo: '/paginadevendas.unityplay/images-logo/Animal-Planet.png', fallback: '🌐' },
@@ -30,34 +35,71 @@ const ChannelLogos = () => {
     setImageErrors(prev => new Set(prev).add(channelName));
   };
 
+  // Função para iniciar o arrasto
+  const handleMouseDown = (e: React.MouseEvent) => {
+    setIsDragging(true);
+    setStartX(e.pageX);
+    setScrollLeft(currentTranslate);
+    if (animationRef.current) {
+      cancelAnimationFrame(animationRef.current);
+    }
+  };
+
+  // Função para mover durante o arrasto
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging) return;
+    e.preventDefault();
+    const x = e.pageX;
+    const walk = (x - startX) * 2; // Multiplicador para sensibilidade
+    const newTranslate = scrollLeft + walk;
+    setCurrentTranslate(newTranslate);
+    
+    if (scrollRef.current) {
+      scrollRef.current.style.transform = `translateX(${newTranslate}px)`;
+    }
+  };
+
+  // Função para finalizar o arrasto
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  // Função para quando o mouse sai do carrossel
+  const handleMouseLeave = () => {
+    setIsDragging(false);
+  };
+
   useEffect(() => {
     const scrollContainer = scrollRef.current;
     if (!scrollContainer) return;
 
-    let animationId: number;
-    let scrollPosition = 0;
-    const scrollSpeed = 1.2; // Velocidade um pouco mais lenta que o ContentCarousel
+    const scrollSpeed = 1.2;
 
     const animate = () => {
-      scrollPosition -= scrollSpeed;
-      
-      // Reset quando chegar ao final da primeira sequência
-      if (Math.abs(scrollPosition) >= scrollContainer.scrollWidth / 2) {
-        scrollPosition = 0;
+      if (!isDragging) {
+        setCurrentTranslate(prev => {
+          const newPosition = prev - scrollSpeed;
+          
+          // Reset quando chegar ao final da primeira sequência
+          if (Math.abs(newPosition) >= scrollContainer.scrollWidth / 2) {
+            return 0;
+          }
+          
+          scrollContainer.style.transform = `translateX(${newPosition}px)`;
+          return newPosition;
+        });
       }
-      
-      scrollContainer.style.transform = `translateX(${scrollPosition}px)`;
-      animationId = requestAnimationFrame(animate);
+      animationRef.current = requestAnimationFrame(animate);
     };
 
-    animationId = requestAnimationFrame(animate);
+    animationRef.current = requestAnimationFrame(animate);
 
     return () => {
-      if (animationId) {
-        cancelAnimationFrame(animationId);
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
       }
     };
-  }, []);
+  }, [isDragging]);
 
   return (
     <section className="py-8 sm:py-12 bg-gradient-to-b from-background/50 to-background overflow-hidden">
@@ -71,17 +113,24 @@ const ChannelLogos = () => {
           </p>
         </div>
         
-        <div className="relative w-full">
+        {/* Carrossel que sai dos limites da tela */}
+        <div className="relative w-screen -mx-4 sm:-mx-6 lg:-mx-8">
           <div className="overflow-hidden">
             <div
               ref={scrollRef}
-              className="flex gap-6 sm:gap-8 will-change-transform"
+              className={`flex gap-6 sm:gap-8 will-change-transform pl-4 sm:pl-6 lg:pl-8 ${
+                isDragging ? 'cursor-grabbing' : 'cursor-grab'
+              }`}
               style={{ width: `${duplicatedChannels.length * 120}px` }}
+              onMouseDown={handleMouseDown}
+              onMouseMove={handleMouseMove}
+              onMouseUp={handleMouseUp}
+              onMouseLeave={handleMouseLeave}
             >
               {duplicatedChannels.map((channel, index) => (
                 <div
                   key={`${channel.name}-${index}`}
-                  className="flex-shrink-0 bg-white/10 backdrop-blur-sm rounded-lg p-3 sm:p-4 border border-white/20 hover:bg-white/20 transition-all duration-300"
+                  className="flex-shrink-0 bg-white/10 backdrop-blur-sm rounded-lg p-3 sm:p-4 border border-white/20 hover:bg-white/20 transition-all duration-300 select-none"
                 >
                   <div className="flex flex-col items-center space-y-1 sm:space-y-2">
                     <div className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center">
@@ -94,6 +143,7 @@ const ChannelLogos = () => {
                           className="w-full h-full object-contain"
                           loading="lazy"
                           onError={() => handleImageError(channel.name)}
+                          draggable={false}
                         />
                       )}
                     </div>

@@ -1,7 +1,12 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const ContentCarousel = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeft, setScrollLeft] = useState(0);
+  const [currentTranslate, setCurrentTranslate] = useState(0);
+  const animationRef = useRef<number>();
 
   const contentItems = [
     { id: 1, title: "O que houve com a secretária kim?", image: "/paginadevendas.unityplay/images/1.webp" },
@@ -30,34 +35,71 @@ const ContentCarousel = () => {
   // Duplicar os itens para criar o efeito infinito
   const duplicatedItems = [...contentItems, ...contentItems];
 
+  // Função para iniciar o arrasto
+  const handleMouseDown = (e: React.MouseEvent) => {
+    setIsDragging(true);
+    setStartX(e.pageX);
+    setScrollLeft(currentTranslate);
+    if (animationRef.current) {
+      cancelAnimationFrame(animationRef.current);
+    }
+  };
+
+  // Função para mover durante o arrasto
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging) return;
+    e.preventDefault();
+    const x = e.pageX;
+    const walk = (x - startX) * 2; // Multiplicador para sensibilidade
+    const newTranslate = scrollLeft + walk;
+    setCurrentTranslate(newTranslate);
+    
+    if (scrollRef.current) {
+      scrollRef.current.style.transform = `translateX(${newTranslate}px)`;
+    }
+  };
+
+  // Função para finalizar o arrasto
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  // Função para quando o mouse sai do carrossel
+  const handleMouseLeave = () => {
+    setIsDragging(false);
+  };
+
   useEffect(() => {
     const scrollContainer = scrollRef.current;
     if (!scrollContainer) return;
 
-    let animationId: number;
-    let scrollPosition = 0;
     const scrollSpeed = 1.8;
 
     const animate = () => {
-      scrollPosition -= scrollSpeed;
-      
-      // Reset quando chegar ao final da primeira sequência
-      if (Math.abs(scrollPosition) >= scrollContainer.scrollWidth / 2) {
-        scrollPosition = 0;
+      if (!isDragging) {
+        setCurrentTranslate(prev => {
+          const newPosition = prev - scrollSpeed;
+          
+          // Reset quando chegar ao final da primeira sequência
+          if (Math.abs(newPosition) >= scrollContainer.scrollWidth / 2) {
+            return 0;
+          }
+          
+          scrollContainer.style.transform = `translateX(${newPosition}px)`;
+          return newPosition;
+        });
       }
-      
-      scrollContainer.style.transform = `translateX(${scrollPosition}px)`;
-      animationId = requestAnimationFrame(animate);
+      animationRef.current = requestAnimationFrame(animate);
     };
 
-    animationId = requestAnimationFrame(animate);
+    animationRef.current = requestAnimationFrame(animate);
 
     return () => {
-      if (animationId) {
-        cancelAnimationFrame(animationId);
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
       }
     };
-  }, []);
+  }, [isDragging]);
 
   return (
     <section className="py-8 sm:py-12 lg:py-16 bg-background overflow-hidden section-spacing">
@@ -70,13 +112,19 @@ const ContentCarousel = () => {
         <div className="overflow-hidden">
           <div
             ref={scrollRef}
-            className="flex gap-3 sm:gap-4 will-change-transform"
+            className={`flex gap-3 sm:gap-4 will-change-transform ${
+              isDragging ? 'cursor-grabbing' : 'cursor-grab'
+            }`}
             style={{ width: `${duplicatedItems.length * 200}px` }}
+            onMouseDown={handleMouseDown}
+            onMouseMove={handleMouseMove}
+            onMouseUp={handleMouseUp}
+            onMouseLeave={handleMouseLeave}
           >
             {duplicatedItems.map((item, index) => (
               <div
                 key={`${item.id}-${index}`}
-                className="flex-shrink-0 w-40 sm:w-52 group cursor-pointer"
+                className="flex-shrink-0 w-40 sm:w-52 group cursor-pointer select-none"
               >
                 <div className="relative rounded-lg overflow-hidden shadow-lg transition-transform duration-300 group-hover:scale-105">
                   <img
@@ -84,6 +132,7 @@ const ContentCarousel = () => {
                     alt={item.title}
                     className="w-full h-56 sm:h-72 object-cover"
                     loading="lazy"
+                    draggable={false}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 right-3 sm:right-4">

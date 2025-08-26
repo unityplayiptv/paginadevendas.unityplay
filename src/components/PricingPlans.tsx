@@ -135,7 +135,7 @@ const PricingPlans = () => {
                       De R${plan.originalPrice}
                     </div>
                   )}
-                  <div className="text-2xl sm:text-4xl font-bold gradient-text-enhanced">
+                  <div className="text-2xl sm:text-4xl font-bold gradient-text">
                     R${plan.price}
                   </div>
                   <div className="text-xs sm:text-sm text-muted-foreground mt-1">
@@ -148,9 +148,10 @@ const PricingPlans = () => {
                 {plan.features.map((feature) => (
                   <div key={feature} className="flex items-start">
                     <span 
-                      className="w-4 h-4 sm:w-5 sm:h-5 text-primary mr-2 sm:mr-3 mt-0.5 flex-shrink-0" 
+                      className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3 mt-0.5 flex-shrink-0" 
+                      style={{ color: 'hsl(270 90% 65%)' }}
                       dangerouslySetInnerHTML={{ 
-                        __html: `<svg class="w-4 h-4 sm:w-5 sm:h-5 text-primary"><use href="/assets/icons-sprite.svg#check"></use></svg>` 
+                        __html: `<svg class="w-4 h-4 sm:w-5 sm:h-5" style="color: hsl(270 90% 65%)"><use href="/assets/icons-sprite.svg#check"></use></svg>` 
                       }} 
                     />
                     <span className="text-sm sm:text-sm text-foreground leading-relaxed">{feature}</span>

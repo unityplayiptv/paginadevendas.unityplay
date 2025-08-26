@@ -4,27 +4,27 @@ const ContentCarousel = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const contentItems = [
-    { id: 1, title: "O que houve com a secretária kim?", image: "public/images/1.webp" },
-    { id: 2, title: "Diário de um Vampiro", image: "public/images/2.webp" },
-    { id: 3, title: "One Piece", image: "public/images/3.webp" },
-    { id: 4, title: "The Walking Dead", image: "public/images/4.webp" },
-    { id: 5, title: "Quando o telefone toca", image: "public/images/5.webp" },
-    { id: 6, title: "Stranger Things", image: "public/images/6.webp" },
-    { id: 7, title: "The Witcher", image: "public/images/7.webp" },
-    { id: 8, title: "Sobrenatural", image: "public/images/8.webp" },
-    { id: 9, title: "Breaking Bad", image: "public/images/9.webp" },
-    { id: 10, title: "Game Of Thrones", image: "public/images/10.webp" },
-    { id: 11, title: "Master Chef EUA", image: "public/images/11.webp" },
-    { id: 12, title: "The Boys", image: "public/images/12.webp" },
-    { id: 13, title: "Pokémon", image: "public/images/13.webp" },
-    { id: 14, title: "Grey's Anatomy", image: "public/images/14.webp" },
-    { id: 15, title: "Origem", image: "public/images/15.webp" },
-    { id: 16, title: "Sorria 2", image: "public/images/16.webp" },
-    { id: 17, title: "Deadpool & Wolverine", image: "public/images/17.webp" },
-    { id: 18, title: "Round 6", image: "public/images/18.webp" },
-    { id: 19, title: "O Senhor dos Anéis", image: "public/images/19.webp" },
-    { id: 20, title: "Robot Selvagem", image: "public/images/20.webp" },
-    { id: 21, title: "Gladiador 2", image: "public/images/21.webp" }
+    { id: 1, title: "O que houve com a secretária kim?", image: "/paginadevendas.unityplay/images/1.webp" },
+    { id: 2, title: "Diário de um Vampiro", image: "/paginadevendas.unityplay/images/2.webp" },
+    { id: 3, title: "One Piece", image: "/paginadevendas.unityplay/images/3.webp" },
+    { id: 4, title: "The Walking Dead", image: "/paginadevendas.unityplay/images/4.webp" },
+    { id: 5, title: "Quando o telefone toca", image: "/paginadevendas.unityplay/images/5.webp" },
+    { id: 6, title: "Stranger Things", image: "/paginadevendas.unityplay/images/6.webp" },
+    { id: 7, title: "The Witcher", image: "/paginadevendas.unityplay/images/7.webp" },
+    { id: 8, title: "Sobrenatural", image: "/paginadevendas.unityplay/images/8.webp" },
+    { id: 9, title: "Breaking Bad", image: "/paginadevendas.unityplay/images/9.webp" },
+    { id: 10, title: "Game Of Thrones", image: "/paginadevendas.unityplay/images/10.webp" },
+    { id: 11, title: "Master Chef EUA", image: "/paginadevendas.unityplay/images/11.webp" },
+    { id: 12, title: "The Boys", image: "/paginadevendas.unityplay/images/12.webp" },
+    { id: 13, title: "Pokémon", image: "/paginadevendas.unityplay/images/13.webp" },
+    { id: 14, title: "Grey's Anatomy", image: "/paginadevendas.unityplay/images/14.webp" },
+    { id: 15, title: "Origem", image: "/paginadevendas.unityplay/images/15.webp" },
+    { id: 16, title: "Sorria 2", image: "/paginadevendas.unityplay/images/16.webp" },
+    { id: 17, title: "Deadpool & Wolverine", image: "/paginadevendas.unityplay/images/17.webp" },
+    { id: 18, title: "Round 6", image: "/paginadevendas.unityplay/images/18.webp" },
+    { id: 19, title: "O Senhor dos Anéis", image: "/paginadevendas.unityplay/images/19.webp" },
+    { id: 20, title: "Robot Selvagem", image: "/paginadevendas.unityplay/images/20.webp" },
+    { id: 21, title: "Gladiador 2", image: "/paginadevendas.unityplay/images/21.webp" }
   ];
 
   // Duplicar os itens para criar o efeito infinito

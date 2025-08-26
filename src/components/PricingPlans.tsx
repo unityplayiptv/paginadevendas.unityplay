@@ -2,7 +2,7 @@ import { optimizedIcon } from "@/utils/iconLoader";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { trackWhatsAppConversion } from "@/utils/analytics";
-import { TrendingDown } from "lucide-react";
+import { TrendingDown, Check } from "lucide-react";
 
 const PricingPlans = () => {
   const plans = [
@@ -144,17 +144,16 @@ const PricingPlans = () => {
                 </div>
               </CardHeader>
 
-              <CardContent className="space-y-2 sm:space-y-3 px-3 sm:px-6 flex-grow">
+              <CardContent className="space-y-3 sm:space-y-4 px-3 sm:px-6 flex-grow">
                 {plan.features.map((feature) => (
-                  <div key={feature} className="flex items-start">
-                    <span 
-                      className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3 mt-0.5 flex-shrink-0" 
+                  <div key={feature} className="flex items-start gap-2 sm:gap-3">
+                    <Check 
+                      className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0 mt-1" 
                       style={{ color: 'hsl(270 90% 65%)' }}
-                      dangerouslySetInnerHTML={{ 
-                        __html: `<svg class="w-4 h-4 sm:w-5 sm:h-5" style="color: hsl(270 90% 65%)"><use href="/assets/icons-sprite.svg#check"></use></svg>` 
-                      }} 
                     />
-                    <span className="text-sm sm:text-sm text-foreground leading-relaxed">{feature}</span>
+                    <span className="text-sm sm:text-base text-foreground leading-relaxed font-medium break-words">
+                      {feature}
+                    </span>
                   </div>
                 ))}
               </CardContent>

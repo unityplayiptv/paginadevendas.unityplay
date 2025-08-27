@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Star, Quote, Shield, Clock } from "lucide-react";
 
 const testimonials = [
@@ -41,14 +41,88 @@ const testimonials = [
 
 const Testimonials = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const touchStartX = useRef(0);
+  const touchEndX = useRef(0);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
+  // Função para iniciar o intervalo automático
+  const startAutoSlide = () => {
+    if (intervalRef.current) clearInterval(intervalRef.current);
+    intervalRef.current = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
     }, 8000);
+  };
 
-    return () => clearInterval(interval);
+  // Função para parar o intervalo automático
+  const stopAutoSlide = () => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
+  };
+
+  useEffect(() => {
+    startAutoSlide();
+    return () => stopAutoSlide();
   }, []);
+
+  // Função para navegar para o próximo depoimento
+  const goToNext = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
+  };
+
+  // Função para navegar para o depoimento anterior
+  const goToPrevious = () => {
+    setCurrentIndex((prevIndex) => 
+      prevIndex === 0 ? testimonials.length - 1 : prevIndex - 1
+    );
+  };
+
+  // Handlers para touch/swipe
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    setIsDragging(true);
+    stopAutoSlide(); // Para a navegação automática durante o swipe
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isDragging) return;
+    touchEndX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    if (!isDragging) return;
+    
+    const deltaX = touchStartX.current - touchEndX.current;
+    const minSwipeDistance = 50; // Distância mínima para considerar um swipe
+
+    if (Math.abs(deltaX) > minSwipeDistance) {
+      if (deltaX > 0) {
+        // Swipe para a esquerda - próximo depoimento
+        goToNext();
+      } else {
+        // Swipe para a direita - depoimento anterior
+        goToPrevious();
+      }
+    }
+
+    setIsDragging(false);
+    // Reinicia a navegação automática após 3 segundos
+    setTimeout(() => {
+      startAutoSlide();
+    }, 3000);
+  };
+
+  // Handler para clique nas bolinhas
+  const handleDotClick = (index: number) => {
+    setCurrentIndex(index);
+    stopAutoSlide();
+    // Reinicia a navegação automática após 5 segundos
+    setTimeout(() => {
+      startAutoSlide();
+    }, 5000);
+  };
 
   const currentTestimonial = testimonials[currentIndex];
 
@@ -65,7 +139,13 @@ const Testimonials = () => {
         </div>
 
         <div className="max-w-4xl mx-auto">
-          <div className="bg-slate-800 rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 lg:p-12 relative">
+          <div 
+            className="bg-slate-800 rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 lg:p-12 relative select-none"
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+            style={{ touchAction: 'pan-y' }} // Permite scroll vertical, mas captura swipe horizontal
+          >
             <Quote className="text-emerald-500 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 mb-4 sm:mb-6" />
             
             <div className="flex justify-center mb-4 sm:mb-6">
@@ -74,7 +154,7 @@ const Testimonials = () => {
               ))}
             </div>
 
-            <blockquote className="text-high-contrast text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed text-center mb-6 sm:mb-8 italic">
+            <blockquote className="text-high-contrast text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed text-center mb-6 sm:mb-8 italic transition-opacity duration-300">
               "{currentTestimonial.text}"
             </blockquote>
 
@@ -82,13 +162,13 @@ const Testimonials = () => {
               <img
                 src={currentTestimonial.avatar}
                 alt={currentTestimonial.name}
-                className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full object-cover"
+                className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full object-cover transition-opacity duration-300"
               />
               <div className="text-center">
-                <h4 className="text-high-contrast font-semibold text-sm sm:text-base md:text-lg">
+                <h4 className="text-high-contrast font-semibold text-sm sm:text-base md:text-lg transition-opacity duration-300">
                   {currentTestimonial.name}
                 </h4>
-                <p className="text-medium-contrast text-xs sm:text-sm">
+                <p className="text-medium-contrast text-xs sm:text-sm transition-opacity duration-300">
                   {currentTestimonial.location}
                 </p>
               </div>
@@ -99,12 +179,13 @@ const Testimonials = () => {
             {testimonials.map((_, index) => (
               <button
                 key={index}
-                onClick={() => setCurrentIndex(index)}
-                className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-colors ${
+                onClick={() => handleDotClick(index)}
+                className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all duration-300 ${
                   index === currentIndex
-                    ? "bg-emerald-500"
-                    : "bg-slate-600 hover:bg-slate-500"
+                    ? "bg-emerald-500 scale-110"
+                    : "bg-slate-600 hover:bg-slate-500 hover:scale-105"
                 }`}
+                aria-label={`Ir para depoimento ${index + 1}`}
               />
             ))}
           </div>

@@ -1,4 +1,4 @@
-import { Play, Star } from "lucide-react";
+import { Play, Star, Maximize } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/hero-streaming-no-text.jpg";
 import { useState, useRef, useEffect } from "react";
@@ -119,29 +119,47 @@ const Hero = () => {
 
             <div className="relative">
               <div className="relative p-1 sm:p-2 bg-gradient-to-br from-primary/20 via-primary/10 to-accent/20 rounded-xl sm:rounded-2xl shadow-xl sm:shadow-2xl">
-                <div className="relative bg-background/90 rounded-lg sm:rounded-xl overflow-hidden">
+                <div className="relative bg-background/90 rounded-lg sm:rounded-xl overflow-hidden video-container">
                   <video 
                     ref={videoRef} 
                     className="w-full h-auto aspect-video bg-black rounded-xl" 
                     preload="metadata" 
                     playsInline 
-                    controls={false} 
+                    controls={true} 
                     loop={false}
-                    controlsList="nodownload noplaybackrate" 
-                    disablePictureInPicture 
+                    controlsList="nodownload" 
+ 
                     onContextMenu={e => isPlaying && e.preventDefault()} 
                     style={{ pointerEvents: isPlaying ? 'none' : 'auto' }}
                     onLoadedMetadata={() => {
                       if (videoRef.current) {
-                        videoRef.current.controls = false;
-                        videoRef.current.setAttribute('controlsList', 'nodownload noplaybackrate');
-                        videoRef.current.setAttribute('disablePictureInPicture', 'true');
+                        videoRef.current.controls = true;
+                        videoRef.current.setAttribute('controlsList', 'nodownload');
                       }
                     }}
                   >
                     <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
                     Seu navegador não suporta o elemento de vídeo.
                   </video>
+                  
+                  {/* Custom fullscreen button for browsers that don't support webkit controls */}
+                  <button 
+                    className="custom-fullscreen-btn"
+                    onClick={() => {
+                      if (videoRef.current) {
+                        if (videoRef.current.requestFullscreen) {
+                          videoRef.current.requestFullscreen();
+                        } else if ((videoRef.current as any).webkitRequestFullscreen) {
+                          (videoRef.current as any).webkitRequestFullscreen();
+                        } else if ((videoRef.current as any).msRequestFullscreen) {
+                          (videoRef.current as any).msRequestFullscreen();
+                        }
+                      }
+                    }}
+                    title="Tela cheia"
+                  >
+                    <Maximize className="w-4 h-4" />
+                  </button>
 
                   {/* Custom play button overlay */}
                   {showButton && (
@@ -169,8 +187,7 @@ const Hero = () => {
                     </div>
                   )}
 
-                  {/* Video playing overlay to prevent interaction */}
-                  {isPlaying && !videoEnded && <div className="absolute inset-0 bg-transparent rounded-xl" />}
+
                 </div>
               </div>
             </div>

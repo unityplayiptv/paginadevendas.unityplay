@@ -192,27 +192,26 @@ const Testimonials = () => {
           
           {/* Barra de prova social */}
           <div className="bg-primary/10 border border-primary/20 rounded-lg py-3 px-4 sm:px-6 mt-6 sm:mt-8">
-            <div className="flex flex-col sm:flex-row items-center justify-center sm:justify-between text-xs sm:text-sm text-center">
-              <div className="flex items-center space-x-4 mb-2 sm:mb-0">
-                <div className="flex items-center space-x-1">
+            <div className="flex flex-col sm:flex-row items-center justify-center sm:justify-between text-xs sm:text-sm text-center gap-3 sm:gap-0">
+              <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 mb-0 sm:mb-0">
+                <div className="flex items-center gap-2">
                   <div className="flex">
                     {[...Array(5)].map((_, i) => (
                       <Star key={i} className="w-3 h-3 fill-yellow-400 text-yellow-400" />
                     ))}
                   </div>
-                  <span className="text-muted-foreground">4.9/5 (12.847 avaliações)</span>
+                  <span className="text-muted-foreground whitespace-nowrap">4.9/5 (12.847 avaliações)</span>
                 </div>
-                <div className="hidden sm:block w-px h-4 bg-border"></div>
-                <span className="text-muted-foreground">📺 Mais de 50.000 famílias assistindo</span>
+                <span className="text-muted-foreground text-center">📺 Mais de 50.000 famílias assistindo</span>
               </div>
-              <div className="flex items-center space-x-4">
-                <div className="flex items-center space-x-1">
+              <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4">
+                <div className="flex items-center gap-2">
                   <Shield className="w-3 h-3 text-green-500" />
-                  <span className="text-muted-foreground">100% Seguro</span>
+                  <span className="text-muted-foreground whitespace-nowrap">100% Seguro</span>
                 </div>
-                <div className="flex items-center space-x-1">
+                <div className="flex items-center gap-2">
                   <Clock className="w-3 h-3 text-blue-500" />
-                  <span className="text-muted-foreground font-medium">Suporte 24/7</span>
+                  <span className="text-muted-foreground font-medium whitespace-nowrap">Suporte 24/7</span>
                 </div>
               </div>
             </div>

@@ -244,4 +244,80 @@ All colors MUST be HSL.
   .stagger-2 { animation-delay: 0.2s; }
   .stagger-3 { animation-delay: 0.3s; }
   .stagger-4 { animation-delay: 0.4s; }
+
+  /* Custom video controls - Show only fullscreen button */
+  video::-webkit-media-controls {
+    display: flex !important;
+  }
+
+  video::-webkit-media-controls-panel {
+    display: flex !important;
+    background: rgba(0, 0, 0, 0.8) !important;
+  }
+
+  /* Hide all controls except fullscreen */
+  video::-webkit-media-controls-play-button,
+  video::-webkit-media-controls-timeline,
+  video::-webkit-media-controls-current-time-display,
+  video::-webkit-media-controls-time-remaining-display,
+  video::-webkit-media-controls-mute-button,
+  video::-webkit-media-controls-volume-slider {
+    display: none !important;
+  }
+
+  /* Keep only fullscreen button visible */
+  video::-webkit-media-controls-fullscreen-button {
+    display: flex !important;
+    margin-left: auto !important;
+  }
+
+  /* Firefox controls */
+  video::-moz-media-controls {
+    display: flex !important;
+  }
+
+  /* For other browsers - custom approach */
+  .video-container {
+    position: relative;
+  }
+
+  .video-container video {
+    width: 100%;
+    height: auto;
+  }
+
+  /* Custom fullscreen button for browsers that don't support webkit controls */
+  .custom-fullscreen-btn {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.7);
+    border: none;
+    color: white;
+    padding: 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    z-index: 10;
+    display: none;
+    touch-action: manipulation;
+  }
+
+  /* Mobile support - show button on touch devices */
+  @media (hover: none) and (pointer: coarse) {
+    .custom-fullscreen-btn {
+      display: block !important;
+      opacity: 0.8;
+    }
+    
+    .video-container:active .custom-fullscreen-btn {
+      opacity: 1;
+    }
+  }
+
+  /* Desktop hover behavior */
+  @media (hover: hover) and (pointer: fine) {
+    .video-container:hover .custom-fullscreen-btn {
+      display: block;
+    }
+  }
 }

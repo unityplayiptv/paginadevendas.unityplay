@@ -245,30 +245,24 @@ All colors MUST be HSL.
   .stagger-3 { animation-delay: 0.3s; }
   .stagger-4 { animation-delay: 0.4s; }
 
-  /* Custom video controls - Show only fullscreen button */
+  /* Hide all native video controls initially */
   video::-webkit-media-controls {
-    display: flex !important;
+    display: none !important;
   }
 
   video::-webkit-media-controls-panel {
-    display: flex !important;
-    background: rgba(0, 0, 0, 0.8) !important;
+    display: none !important;
   }
 
-  /* Hide all controls except fullscreen */
+  /* Hide all native controls */
   video::-webkit-media-controls-play-button,
   video::-webkit-media-controls-timeline,
   video::-webkit-media-controls-current-time-display,
   video::-webkit-media-controls-time-remaining-display,
   video::-webkit-media-controls-mute-button,
-  video::-webkit-media-controls-volume-slider {
-    display: none !important;
-  }
-
-  /* Keep only fullscreen button visible */
+  video::-webkit-media-controls-volume-slider,
   video::-webkit-media-controls-fullscreen-button {
-    display: flex !important;
-    margin-left: auto !important;
+    display: none !important;
   }
 
   /* Firefox controls */
@@ -289,24 +283,54 @@ All colors MUST be HSL.
   /* Custom fullscreen button for browsers that don't support webkit controls */
   .custom-fullscreen-btn {
     position: absolute;
-    bottom: 10px;
-    right: 10px;
-    background: rgba(0, 0, 0, 0.7);
-    border: none;
+    bottom: 12px;
+    right: 12px;
+    background: rgba(0, 0, 0, 0.8);
+    border: 2px solid rgba(255, 255, 255, 0.3);
     color: white;
-    padding: 8px;
-    border-radius: 4px;
+    padding: 12px;
+    border-radius: 8px;
     cursor: pointer;
-    z-index: 10;
+    z-index: 1000;
     display: none;
     touch-action: manipulation;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(4px);
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .custom-fullscreen-btn:hover {
+    background: rgba(0, 0, 0, 0.9);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: scale(1.05);
+  }
+
+  .custom-fullscreen-btn:active {
+    transform: scale(0.95);
+  }
+
+  /* Chrome Android specific - always show button */
+  @media screen and (max-width: 768px) {
+    .custom-fullscreen-btn {
+      display: flex !important;
+      opacity: 0.9;
+    }
+    
+    /* Hide webkit controls on mobile Chrome */
+    video::-webkit-media-controls {
+      display: none !important;
+    }
   }
 
   /* Mobile support - show button on touch devices */
   @media (hover: none) and (pointer: coarse) {
     .custom-fullscreen-btn {
-      display: block !important;
-      opacity: 0.8;
+      display: flex !important;
+      opacity: 0.9;
     }
     
     .video-container:active .custom-fullscreen-btn {
@@ -317,7 +341,7 @@ All colors MUST be HSL.
   /* Desktop hover behavior */
   @media (hover: hover) and (pointer: fine) {
     .video-container:hover .custom-fullscreen-btn {
-      display: block;
+      display: flex;
     }
   }
 }

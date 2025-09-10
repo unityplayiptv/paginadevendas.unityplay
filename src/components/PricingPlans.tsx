@@ -166,7 +166,7 @@ const PricingPlans = () => {
                   🎁 Começar Teste Grátis
                 </Button>
                 <p className="text-xs text-center text-muted-foreground">
-                  7 dias grátis • <span className="font-medium text-green-600">Cancele quando quiser</span>
+                  7 dias para testar • <span className="font-medium text-green-600">Cancele quando quiser</span>
                 </p>
               </CardFooter>
             </Card>
@@ -176,7 +176,7 @@ const PricingPlans = () => {
         <div className="text-center mt-6 sm:mt-12 animate-fade-in-up stagger-4">
           <div className="bg-green-50 border border-green-200 rounded-lg p-4 max-w-2xl mx-auto">
             <p className="text-sm sm:text-base text-green-800 font-medium mb-2">
-              ✅ Garantia de 7 dias grátis • ✅ Cancele quando quiser • ✅ Suporte 24/7
+              ✅ Garantia de 7 dias • ✅ Cancele quando quiser • ✅ Suporte 24/7
             </p>
             <p className="text-xs sm:text-sm text-green-600">
               Sem compromisso • Sem taxas de cancelamento • 100% seguro

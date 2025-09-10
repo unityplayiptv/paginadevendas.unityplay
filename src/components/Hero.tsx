@@ -1,6 +1,7 @@
 import { Play, Star, Maximize } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/hero-streaming-no-text.jpg";
+const videoSrc = "https://drive.google.com/uc?export=download&id=1W_6HDfEH_bZEI0g7114Yd5SbOWh10yKp";
 import { useState, useRef, useEffect } from "react";
 import { trackEvent, trackVideoInteraction, trackWhatsAppConversion } from "@/utils/analytics";
 
@@ -125,7 +126,7 @@ const Hero = () => {
                     className="w-full h-auto aspect-video bg-black rounded-xl" 
                     preload="metadata" 
                     playsInline 
-                    controls={true} 
+                    controls={false} 
                     loop={false}
                     controlsList="nodownload" 
  
@@ -133,12 +134,12 @@ const Hero = () => {
                     style={{ pointerEvents: isPlaying ? 'none' : 'auto' }}
                     onLoadedMetadata={() => {
                       if (videoRef.current) {
-                        videoRef.current.controls = true;
+                        videoRef.current.controls = false;
                         videoRef.current.setAttribute('controlsList', 'nodownload');
                       }
                     }}
                   >
-                    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+                    <source src={videoSrc} type="video/mp4" />
                     Seu navegador não suporta o elemento de vídeo.
                   </video>
                   

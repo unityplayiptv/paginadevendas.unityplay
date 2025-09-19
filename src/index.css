@@ -345,3 +345,24 @@ All colors MUST be HSL.
     }
   }
 }
+
+/* Text shadow utilities for elegant text highlighting */
+@layer utilities {
+  .text-shadow-glow {
+    text-shadow: 
+      0 0 10px rgba(255, 255, 255, 0.3),
+      0 0 20px rgba(255, 255, 255, 0.2),
+      0 2px 4px rgba(0, 0, 0, 0.5);
+  }
+  
+  .text-neon-cyan {
+    color: #00E0D9;
+    text-shadow: 
+      0 0 5px #00E0D9,
+      0 0 10px #00E0D9,
+      0 0 15px #00E0D9,
+      0 0 20px #00E0D9,
+      0 0 35px #00E0D9,
+      0 0 40px #00E0D9;
+  }
+}

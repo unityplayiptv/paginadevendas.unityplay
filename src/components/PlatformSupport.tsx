@@ -27,18 +27,18 @@ const PlatformSupport = () => {
           Disponível em todos os <span className="gradient-text">SISTEMAS</span>
         </h2>
         
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
+        <div className="grid grid-cols-4 md:grid-cols-4 gap-4 md:gap-8 max-w-4xl mx-auto">
           {platforms.map((platform, index) => {
             return (
               <div 
                 key={platform.name}
-                className="flex flex-col items-center justify-center p-6 rounded-lg hover:bg-background/50 transition-colors duration-300"
+                className="flex flex-col items-center justify-center p-3 md:p-6 rounded-lg hover:bg-background/50 transition-colors duration-300"
               >
                 {(() => {
                   const IconComponent = platform.icon;
-                  return <IconComponent className="w-12 h-12 mb-3 text-primary" />;
+                  return <IconComponent className="w-8 h-8 md:w-12 md:h-12 mb-2 md:mb-3 text-primary" />;
                 })()}
-                <span className="text-sm font-medium text-center text-foreground">
+                <span className="text-xs md:text-sm font-medium text-center text-foreground leading-tight">
                   {platform.name}
                 </span>
               </div>

@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import contentImageDesktop from "@/assets/content-showcase.jpg";
 import contentImageMobile from "@/assets/content-showcase2.jpg";
 const ContentShowcase = () => {
-  const categories = ["Filmes em Destaque", "Séries Populares", "Documentários", "Infantil", "ESPORTES", "Novelas"];
+  const categories = ["Filmes em Destaque", "Séries Populares", "Documentários", "Conteúdo Infantil", "ESPORTES", "Novelas"];
   return <section className="py-16 sm:py-24 px-4 sm:px-6 bg-muted/20">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12 sm:mb-16">

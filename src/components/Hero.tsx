@@ -1,7 +1,7 @@
 import { Play, Star, Maximize } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/hero-streaming-no-text.jpg";
-const videoSrc = "https://drive.google.com/uc?export=download&id=1W_6HDfEH_bZEI0g7114Yd5SbOWh10yKp";
+import videoSrc from "@/assets/vls-unity.mp4";
 import { useState, useRef, useEffect } from "react";
 import { trackEvent, trackVideoInteraction, trackWhatsAppConversion } from "@/utils/analytics";
 
@@ -82,6 +82,8 @@ const Hero = () => {
     };
   }, [isPlaying]);
 
+
+
   return (
     <section className="relative min-h-[100svh] flex items-center justify-center overflow-hidden">
       {/* Background Image */}
@@ -98,9 +100,8 @@ const Hero = () => {
       <div className="relative z-10 text-center max-w-4xl mx-auto px-4 sm:px-6 flex flex-col justify-between min-h-[100svh] py-16 sm:py-20">
         {/* Title Section - Moved higher */}
         <div className="pt-0 -mt-8 sm:-mt-20">
-          <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-6xl font-bold mb-3 sm:mb-6 animate-fade-in-up text-high-contrast">
-            O Melhor em{" "}
-            <span className="gradient-text-enhanced">Streaming</span>
+          <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-6xl font-bold mb-3 sm:mb-6 animate-fade-in-up text-high-contrast drop-shadow-lg text-shadow-glow">
+            Excelência em Streaming
           </h1>
           
           <p className="text-sm sm:text-lg md:text-xl lg:text-2xl text-medium-contrast mb-4 sm:mb-12 animate-fade-in-up stagger-1 max-w-2xl mx-auto px-2">
@@ -110,7 +111,7 @@ const Hero = () => {
         </div>
 
         {/* Video Section - Added in the middle */}
-        <div className="flex-1 flex items-center justify-center max-w-3xl mx-auto w-full">
+        <div className="flex-1 flex items-center justify-center max-w-3xl mx-auto w-full -mt-8 sm:mt-0">
           <div className="w-full">
             <div className="text-center mb-3 sm:mb-6 animate-fade-in-up">
               <h2 className="text-lg sm:text-2xl lg:text-3xl font-bold mb-2 sm:mb-4 gradient-text">
@@ -189,6 +190,8 @@ const Hero = () => {
                   )}
 
 
+
+
                 </div>
               </div>
             </div>
@@ -242,21 +245,7 @@ const Hero = () => {
               Ver Planos
             </Button>
           </div>
-        
-        <div className="mt-4 sm:mt-12 flex flex-row justify-center items-center space-x-6 sm:space-x-8 animate-fade-in-up stagger-3">
-          <div className="text-center">
-            <div className="text-xl sm:text-3xl font-bold gradient-text">10K+</div>
-            <div className="text-xs sm:text-sm text-muted-foreground">Títulos</div>
-          </div>
-          <div className="text-center">
-            <div className="text-xl sm:text-3xl font-bold gradient-text">4K</div>
-            <div className="text-xs sm:text-sm text-muted-foreground">Qualidade</div>
-          </div>
-          <div className="text-center">
-            <div className="text-xl sm:text-3xl font-bold gradient-text" translate="no">24/7</div>
-            <div className="text-xs sm:text-sm text-muted-foreground">Disponível</div>
-          </div>
-        </div>
+
         </div>
       </div>
       

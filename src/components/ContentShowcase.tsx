@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import contentImageDesktop from "@/assets/content-showcase.jpg";
 import contentImageMobile from "@/assets/content-showcase2.jpg";
 const ContentShowcase = () => {
-  const categories = ["Filmes em Destaque", "Séries Populares", "Documentários", "Conteúdo Infantil", "ESPORTES", "Novelas"];
+  const categories = ["Filmes Lançamentos", "Séries Populares", "Documentários", "Conteúdo Infantil", "ESPORTES", "Novelas", "Canais ao Vivo", "Conteúdo Adulto"];
   return <section className="py-16 sm:py-24 px-4 sm:px-6 bg-muted/20">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12 sm:mb-16">
@@ -66,11 +66,11 @@ const ContentShowcase = () => {
         {/* Stats */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mt-12 sm:mt-16 animate-fade-in-up stagger-4">
           <div className="text-center">
-            <div className="text-2xl sm:text-3xl lg:text-4xl font-bold gradient-text mb-2">10,000+</div>
+            <div className="text-2xl sm:text-3xl lg:text-4xl font-bold gradient-text mb-2">18,000+</div>
             <div className="text-xs sm:text-sm text-muted-foreground">Filmes</div>
           </div>
           <div className="text-center">
-            <div className="text-2xl sm:text-3xl lg:text-4xl font-bold gradient-text mb-2">5,000+</div>
+            <div className="text-2xl sm:text-3xl lg:text-4xl font-bold gradient-text mb-2">6,000+</div>
             <div className="text-xs sm:text-sm text-muted-foreground">Séries</div>
           </div>
           <div className="text-center">
@@ -78,8 +78,8 @@ const ContentShowcase = () => {
             <div className="text-xs sm:text-sm text-muted-foreground">Documentários</div>
           </div>
           <div className="text-center">
-            <div className="text-2xl sm:text-3xl lg:text-4xl font-bold gradient-text mb-2">24/7</div>
-            <div className="text-xs sm:text-sm text-muted-foreground">Novo Conteúdo</div>
+            <div className="text-2xl sm:text-3xl lg:text-4xl font-bold gradient-text mb-2">2000+</div>
+            <div className="text-xs sm:text-sm text-muted-foreground">Canais</div>
           </div>
         </div>
       </div>

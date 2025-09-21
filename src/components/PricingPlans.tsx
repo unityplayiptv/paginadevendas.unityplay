@@ -15,9 +15,11 @@ const PricingPlans = () => {
       savings: null,
       features: [
         "Acesso a Canais, Filmes e Séries",
-        "Qualidade SD, HD e FHD",
-        "Apenas 1 tela",
-        "Conteúdo adulto opcional"
+        "Qualidade SD, HD, FHD e 4K",
+        "Instale em quantos aparelhos quiser",
+        "Conteúdo adulto opcional",
+        "Esportes",
+        "Conteúdo infantil"
       ],
       popular: false,
       limitedOffer: false
@@ -31,9 +33,11 @@ const PricingPlans = () => {
       savings: null,
       features: [
         "Acesso a Canais, Filmes e Séries",
-        "Qualidade SD, HD e FHD",
-        "Acesso a 2 telas simultâneas",
-        "Conteúdo adulto opcional"
+        "Qualidade SD, HD, FHD e 4K",
+        "Instale em quantos aparelhos quiser",
+        "Conteúdo adulto opcional",
+        "Esportes",
+        "Conteúdo infantil"
       ],
       popular: true,
       limitedOffer: false
@@ -47,9 +51,11 @@ const PricingPlans = () => {
       savings: "13%",
       features: [
         "Acesso a Canais, Filmes e Séries",
-        "Qualidade SD, HD e FHD",
-        "Acesso a 3 telas simultâneas",
-        "Conteúdo adulto opcional"
+        "Qualidade SD, HD, FHD e 4K",
+        "Instale em quantos aparelhos quiser",
+        "Conteúdo adulto opcional",
+        "Esportes",
+        "Conteúdo infantil"
       ],
       popular: false,
       limitedOffer: true
@@ -64,7 +70,7 @@ const PricingPlans = () => {
       features: [
         "Acesso a Canais, Filmes e Séries",
         "Qualidade SD, HD, FHD e 4K",
-        "Acesso a 3 telas simultâneas",
+        "Instale em quantos aparelhos quiser",
         "Conteúdo adulto opcional",
         "Esportes",
         "Conteúdo infantil"
@@ -163,7 +169,7 @@ const PricingPlans = () => {
                   onClick={() => handleWhatsAppRedirect(plan.name, plan.price)}
                   className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold py-3 sm:py-4 px-4 sm:px-8 min-h-[48px] sm:min-h-[56px] text-sm sm:text-base flex items-center justify-center text-center"
                 >
-                  🎁 Começar Teste Grátis
+                  COMEÇAR TESTE
                 </Button>
                 <p className="text-xs text-center text-muted-foreground">
                   7 dias para testar • <span className="font-medium text-green-600">Cancele quando quiser</span>

@@ -15,19 +15,19 @@ const FAQ = () => {
     },
     {
       question: "CONSIGO ASSISTIR EM MAIS DE 1 APARELHO?",
-      answer: "Sim! Dependendo do seu plano, você pode assistir simultaneamente em 1 a 4 telas diferentes. Cada plano oferece um número específico de telas simultâneas."
+      answer: "Sim! Consegue instalar nosso aplicativo em quantos dispositivos quiser, porém a quantidade de telas assistindo ao mesmo tempo varia dependendo do plano adquirido."
     },
     {
       question: "PRECISA DE INTERNET PARA FUNCIONAR?",
-      answer: "Para streaming ao vivo, sim. Mas você pode baixar conteúdo para assistir offline quando não tiver internet disponível."
+      answer: "Sim, é preciso ter conexão de internet no seu dispositivo para que o conteúdo possa ser reproduzido."
     },
     {
       question: "PRECISA DE ESPECIALISTA PARA CONFIGURAR?",
-      answer: "Não! Nossa plataforma é super fácil de usar. Basta criar sua conta, escolher seu plano e começar a assistir em segundos."
+      answer: "Não! Nossa plataforma é super fácil de usar. Disponibilizamos um passo a passo para baixar o aplicativo, e se ainda sim você não conseguir instalar o aplicativo, temos o suporte disponível sempre que você   precisar."
     },
     {
       question: "O PAGAMENTO É MENSAL?",
-      answer: "Oferecemos várias opções: quinzenal (R$14,90), mensal (R$29,90), trimestral (R$77,90) e semestral (R$143,90). Você escolhe o que funciona melhor para você."
+      answer: "Oferecemos várias opções: Quinzenal, Mensal, Trimestral e Semestral. Escolha a maneira que fique mais prática para você."
     },
     {
       question: "POSSO CANCELAR A QUALQUER MOMENTO?",
@@ -35,7 +35,7 @@ const FAQ = () => {
     },
     {
       question: "COMO FUNCIONA O TESTE GRÁTIS?",
-      answer: "Simples! Você recebe 7 dias de acesso completo e gratuito a toda nossa plataforma. Durante este período, pode testar todos os canais, filmes e séries. Se não gostar, é só cancelar antes do 7º dia e não será cobrado nada."
+      answer: "Simples! Você adquire um de nossos planos, desfrute do sistema por completo e, dentro de 7 dias, se não gostar por algum motivo, nós nos comprometemos a devolver todo o valor do plano."
     }
   ];
 
@@ -44,42 +44,53 @@ const FAQ = () => {
   };
 
   return (
-    <section className="py-10 sm:py-16 lg:py-24 px-4 sm:px-6 bg-card/50 section-spacing">
-      <div className="max-w-4xl mx-auto">
-        <div className="text-center mb-12 sm:mb-16">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 gradient-text-enhanced animate-fade-in-up">
+    <section className="py-12 sm:py-20 lg:py-32 px-4 sm:px-6 lg:px-8 bg-card/50 section-spacing">
+      <div className="max-w-5xl mx-auto">
+        {/* Header centralizado com melhor espaçamento */}
+        <div className="text-center mb-16 sm:mb-20 lg:mb-24">
+          <h2 className="text-3xl sm:text-4xl lg:text-6xl font-bold mb-6 sm:mb-8 gradient-text-enhanced animate-fade-in-up">
             PERGUNTAS FREQUENTES
           </h2>
+          <p className="text-lg sm:text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto animate-fade-in-up stagger-1">
+            Tire suas dúvidas sobre nossos serviços
+          </p>
         </div>
 
-        <div className="space-y-4">
-          {faqs.map((faq, index) => (
-            <div
-              key={index}
-              className="border border-primary/20 rounded-lg overflow-hidden bg-background/50 backdrop-blur-sm animate-scale-in"
-              style={{ animationDelay: `${index * 0.1}s` }}
-            >
-              <button
-                onClick={() => toggleFAQ(index)}
-                className="w-full px-4 sm:px-6 py-3 sm:py-4 text-left flex justify-between items-center hover:bg-primary/10 transition-colors"
+        {/* Container das FAQs com melhor organização */}
+        <div className="max-w-4xl mx-auto">
+          <div className="space-y-4 sm:space-y-6">
+            {faqs.map((faq, index) => (
+              <div
+                key={index}
+                className="border border-primary/20 rounded-xl sm:rounded-2xl overflow-hidden bg-background/50 backdrop-blur-sm animate-scale-in shadow-lg hover:shadow-xl transition-all duration-300"
+                style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <span className="font-semibold text-high-contrast text-sm sm:text-base">
-                  {faq.question}
-                </span>
-                <ChevronDown
-                  className={`w-4 h-4 sm:w-5 sm:h-5 text-primary transition-transform duration-200 flex-shrink-0 ml-2 ${
-                    openIndex === index ? 'rotate-180' : ''
-                  }`}
-                />
-              </button>
-              
-              {openIndex === index && (
-                <div className="px-4 sm:px-6 pb-3 sm:pb-4 text-medium-contrast animate-fade-in text-sm sm:text-base">
-                  <p>{faq.answer}</p>
-                </div>
-              )}
-            </div>
-          ))}
+                <button
+                  onClick={() => toggleFAQ(index)}
+                  className="w-full px-6 sm:px-8 lg:px-10 py-4 sm:py-6 lg:py-7 text-left flex justify-between items-center hover:bg-primary/10 transition-all duration-300 group"
+                >
+                  <span className="font-semibold text-high-contrast text-sm sm:text-base lg:text-lg pr-4 group-hover:text-primary transition-colors">
+                    {faq.question}
+                  </span>
+                  <ChevronDown
+                    className={`w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 text-primary transition-all duration-300 flex-shrink-0 group-hover:scale-110 ${
+                      openIndex === index ? 'rotate-180' : ''
+                    }`}
+                  />
+                </button>
+                
+                {openIndex === index && (
+                  <div className="px-6 sm:px-8 lg:px-10 pb-4 sm:pb-6 lg:pb-7 text-medium-contrast animate-fade-in">
+                    <div className="border-t border-primary/10 pt-4 sm:pt-6">
+                      <p className="text-sm sm:text-base lg:text-lg leading-relaxed">
+                        {faq.answer}
+                      </p>
+                    </div>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
